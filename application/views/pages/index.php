@@ -5,7 +5,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link mr-md-2" href="#">Logout</a>
+      <a class="nav-item nav-link mr-md-2" href="<?php echo base_url(); ?>Users/logout">Logout</a>
     </div>
   </div>
 </nav>

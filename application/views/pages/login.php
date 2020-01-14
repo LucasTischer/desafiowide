@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="#">
 
-    <title>Login</title>
+    <title>Interwebs | Login</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -27,7 +27,7 @@
         <button class="btn btn-sm btn-outline-primary" type="submit" style="min-width:150px">Cadastre-se</button>
     </p>
     <div class="text-center" id="login">
-      <form class="form-signin" method="POST" action="logar.php">
+      <form class="form-signin" method="POST" action="<?php echo base_url(); ?>Users/login_validation">
         <img class="mb-4" src="../Assets/Images/cam.png" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Acesso ao sistema</h1>
 
@@ -37,7 +37,8 @@
         <label for="inputPassword" class="sr-only">Senha</label>
         <input type="password" id="inputPasswordLogin" name="senha" class="form-control" placeholder="Digite sua senha" required>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">ENTRAR</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">ENTRAR</button>
+        <?php echo $this->session->flashdata("error"); ?>
 
       </form>
     </div>
