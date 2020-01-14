@@ -28,39 +28,46 @@
     </p>
     <div class="text-center" id="login">
       <form class="form-signin" method="POST" action="<?php echo base_url(); ?>Users/login_validation">
-        <img class="mb-4" src="../Assets/Images/cam.png" alt="" width="72" height="72">
+        <img class="mb-4" src="<?=base_url('assets/images/logo.png');?>" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Acesso ao sistema</h1>
 
         <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" id="inputEmailLogin" name="email" class="form-control" placeholder="Digite seu email" required autofocus>
+        <input type="email" id="inputEmailLogin" name="email" class="form-control" placeholder="Digite seu email"  autofocus>
+        <span class="text-danger"><?php echo form_error("email"); ?></span>
 
         <label for="inputPassword" class="sr-only">Senha</label>
-        <input type="password" id="inputPasswordLogin" name="senha" class="form-control" placeholder="Digite sua senha" required>
+        <input type="password" id="inputPasswordLogin" name="senha" class="form-control" placeholder="Digite sua senha" >
+        <span class="text-danger"><?php echo form_error("senha"); ?></span>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">ENTRAR</button>
         <?php echo $this->session->flashdata("error"); ?>
+        <?php echo $this->session->flashdata("success"); ?>
 
       </form>
     </div>
 
     <div class="text-center" id="cadastro">
-      <form class="form-signin" method="POST" action="cadastrar.php">
-        <img class="mb-4" src="../Assets/Images/cam.png" alt="" width="72" height="72">
+      <form class="form-signin" method="POST" action="<?php echo base_url(); ?>Users/sign_up">
+        <img class="mb-4" src="<?=base_url('assets/images/logo.png');?>" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal">Cadastro</h1>
 
-        <label for="inputUsername" class="sr-only">Email</label>
-        <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Digite seu username" required autofocus>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" id="inputUsername" name="username" class="form-control" placeholder="Digite seu username"  autofocus>
+        <span class="text-danger"><?php echo form_error("username"); ?></span>
 
         <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" id="inputEmailCadastro" name="email" class="form-control" placeholder="Digite seu email" required autofocus>
+        <input type="email" id="inputEmailCadastro" name="emailcadastro" class="form-control" placeholder="Digite seu email"  autofocus>
+        <span class="text-danger"><?php echo form_error("emailcadastro"); ?></span>
 
         <label for="inputPassword" class="sr-only">Senha</label>
-        <input type="password" id="inputPasswordCadastro" name="senha" class="form-control" placeholder="Digite sua senha" required>
+        <input type="password" id="inputPasswordCadastro" name="senhacadastro" class="form-control" placeholder="Digite sua senha" >
+        <span class="text-danger"><?php echo form_error("senhacadastro"); ?></span>
 
         <label for="inputPassword2" class="sr-only">Repita a senha</label>
-        <input type="password" id="inputPassword2" name="senha2" class="form-control" placeholder="Repita sua senha" required>
+        <input type="password" id="inputPassword2" name="senha2" class="form-control" placeholder="Repita sua senha" >
+        <span class="text-danger"><?php echo form_error("senha2"); ?></span>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">CADASTRAR</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="signup">CADASTRAR</button>
         
       </form>
     </div>
