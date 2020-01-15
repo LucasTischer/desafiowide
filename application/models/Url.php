@@ -22,4 +22,10 @@ class Url extends CI_Model{
         $this->db->insert("urls", $data);
     }
 
+    public function delete_url($data){
+
+        $this->db->where('id', $data);
+        $this->db->delete('urls');
+    }
+
 }

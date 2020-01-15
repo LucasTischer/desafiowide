@@ -20,7 +20,7 @@
             if($this->form_validation->run()){
 
                 $email = $this->input->post('email');
-                $senha = $this->input->post('senha');
+                $senha = sha1($this->input->post('senha'));
 
                 $this->load->model('User');
                 
@@ -37,7 +37,7 @@
                 }
                 //se nao encontrado retorna ao login e mosta erro de login invalido
                 else{
-                    $this->session->set_flashdata('error', 'Email e senha invalidos');
+                    $this->session->set_flashdata('error', 'Credenciais inválidas');
                     redirect(base_url().'Users/login');
 
                 }
@@ -70,7 +70,7 @@
                 //cria um array com os dados a serem cadastrados
                 $data = array(
                     'username' => $this->input->post('username'),
-                    'password' => $this->input->post('senhacadastro'),
+                    'password' => sha1($this->input->post('senhacadastro')),
                     'email' => $this->input->post('emailcadastro')
                 );
 

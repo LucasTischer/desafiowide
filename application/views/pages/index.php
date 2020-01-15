@@ -11,7 +11,7 @@
 </nav>
 
 <div class="container">
-        <div class="row">
+  <div class="row">
 
           <div class="col">
             <div class="container" style="padding-top: 6%">
@@ -29,11 +29,20 @@
           </div>
 
         </div>
-        <div class="container-fluid">
-            <?php echo $this->session->flashdata("error"); ?>
-            <?php echo $this->session->flashdata("success"); ?>
-        </div>
-      </div>
+          <?php
+          if($this->session->flashdata("error") !='' or $this->session->flashdata("success") !=''){
+          ?>
+            <div class="alert alert-primary alert-dismissible fade show text-center" role="alert" auto-close="3000">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <strong><?php echo $this->session->flashdata("error"); ?></strong>
+              <strong><?php echo $this->session->flashdata("success"); ?></strong>
+
+            </div>
+          <?php } ?>
+
+  </div>
 
       <div class="container" style="padding-top: 1%">
         <div class="table-responsive">
@@ -55,15 +64,17 @@
                       <td>".$url['status']."</td>
                       <td>".$url['retorno']."</td>
                       <td>".$url['updated_at']."</td>
-                      <td>
-                        <form class=\"formButton\"action=\"<?php echo base_url(); ?>Users/logout\" method=\"post\">
-                          <input type=\"text\" name=\"ver\" value=".$url['id']." hidden>
-                          <button id=\"ver\" type=\"submit\" class=\"btn btn-outline-primary btn_form\" title=\"Visializar videos gravados\"> Visualizar </button>
+                      <td>"; 
+              ?>
+                        <button id="ver" type="submit" class="btn btn-outline-primary btn_form " value=".$url['id']." title="Visializar"> Visualizar </button>
+                        
+                        <form class="formButton" method="POST" action="<?php echo base_url(); ?>Urls/del_url">
+                          <input type="text" name="id" id="id" value="<?php echo $url['id']; ?>" hidden="">
+                          <button id="del" type="submit" class="btn btn-outline-danger del btn_form" title="Excluír câmera"> Excluír </button>
                         </form>
-
-                        <button id=\"del\" type=\button\" class=\"btn btn-outline-danger del btn_form\" value=".$url['id']." title=\"Excluír câmera\"> Excluír </button>
                       </td>
-                    </tr>";
+                    </tr>
+              <?php
                 endforeach;
               ?>
             </tbody>
@@ -89,7 +100,7 @@
                 <div class="modal-body">
 
                 <div class="form-group">
-                  <input type="text" class="form-control input-hig bstooltip" id="url" name="url" placeholder="Insira a URL" title="URL a ser rastreada">
+                  <input type="text" class="form-control input-hig bstooltip" id="url" name="url" placeholder="Ex: http://www.endereco.com" title="URL a ser rastreada">
                 </div>
 
                 </div>

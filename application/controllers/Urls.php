@@ -1,5 +1,6 @@
 <?php
     class Urls extends CI_controller{
+        
         public function view($page = 'index'){
             if(!file_exists(APPPATH.'views/pages/'.$page.'.php')){
                 show_404();
@@ -28,26 +29,48 @@
             $this->load->library('form_validation');
             $this->form_validation->set_rules('url', 'URL', 'required');
 
-            //executa a validacao
-            if($this->form_validation->run()){
-
-               //cria um array com os dados a serem cadastrados
-               $user = $this->session->userdata('id'); //id do usuario logado
-               $data = array('url' => $this->input->post('url'), 'user' => $user);
-
-               $this->load->model('Url');
-
-               //realiza o cadastro
-               $this->Url->insert_url($data);
-
-               $this->session->set_flashdata('success', 'URL Cadastrada com sucesso');
-               redirect(base_url().'Urls/view');
-
+            //verifica se a URL e valida
+            $pattern = '/^(http|https):\\/\\/[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}'.'((:[0-9]{1,5})?\\/.*)?$/i';
+            
+            if (!preg_match($pattern, $this->input->post('url'))){
+                $this->session->set_flashdata('error', 'URL Inválida');
+                $this->view();
             }
             else{
-                $this->view();
-                $this->session->set_flashdata('error', 'Falha no cadastro da URL');
+                //executa a validacao
+                if($this->form_validation->run()){
+
+                //cria um array com os dados a serem cadastrados
+                $user = $this->session->userdata('id'); //id do usuario logado
+                $data = array('url' => $this->input->post('url'), 'user' => $user);
+
+                $this->load->model('Url');
+
+                //realiza o cadastro
+                $this->Url->insert_url($data);
+
+                $this->session->set_flashdata('success', 'URL Cadastrada com sucesso');
+                redirect(base_url().'Urls/view');
+
+                }
+                else{
+                    $this->session->set_flashdata('error', 'Falha no cadastro da URL');
+                    $this->view();
+                }
             }
+        }
+
+        //excluir url cadastrada
+        public function del_url(){
+
+            $data = $this->input->post('id');
+
+            $this->load->model('Url');
+
+            $this->Url->delete_url($data);
+
+            $this->session->set_flashdata('success', 'URL Removida');
+            redirect(base_url().'Urls/view');
         }
 
     }
