@@ -52,17 +52,17 @@
                 <th scope="col">URL</th>
                 <th scope="col">STATUS</th>
                 <th scope="col">RETORNO</th>
-                <th scope="col">ACESSO EM</th>
+                <th scope="col">ATUALIZADO EM</th>
                 <th scope="col">AÇÕES</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="tabela_retorno">
               <?php
                 foreach($urls as $url):
                   echo "<tr>
                       <td>".$url['url']."</td>
                       <td>".$url['status']."</td>
-                      <td>".$url['retorno']."</td>
+                      <td></td>
                       <td>".$url['updated_at']."</td>
                       <td>"; 
               ?>

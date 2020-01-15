@@ -1,6 +1,11 @@
 <?php
     class Users extends CI_controller{
         
+        public function __construct(){
+            parent::__construct();
+            $this->load->model('User');
+        }
+
         //acessar pagina de login
         public function login(){
 
@@ -21,8 +26,6 @@
 
                 $email = $this->input->post('email');
                 $senha = sha1($this->input->post('senha'));
-
-                $this->load->model('User');
                 
                 //verifica as credenciais no banco de dados e caso o usuario 
                 //for encontrado cria uma sessao com o seu id
@@ -73,8 +76,6 @@
                     'password' => sha1($this->input->post('senhacadastro')),
                     'email' => $this->input->post('emailcadastro')
                 );
-
-                $this->load->model('User');
 
                 //realiza o cadastro
                 $this->User->insert_user($data);

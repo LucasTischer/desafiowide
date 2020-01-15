@@ -1,5 +1,10 @@
 <?php
     class Urls extends CI_controller{
+
+        public function __construct(){
+            parent::__construct();
+            $this->load->model('Url');
+        }
         
         public function view($page = 'index'){
             if(!file_exists(APPPATH.'views/pages/'.$page.'.php')){
@@ -10,7 +15,6 @@
             if($this->session->userdata('id')){
                 $data['title'] = ucfirst($page);
 
-                $this->load->model('Url');
                 $data['urls'] = $this->Url->show_urls($this->session->userdata('id'));
 
                 $this->load->view('templates/header');
@@ -20,6 +24,13 @@
             else{
                 redirect(base_url().'Users/login');
             }
+        }
+
+        //recarregar tabela com a lista de URLs
+        public function reload_tabela($page = 'lista'){
+            $data['urls'] = $this->Url->show_urls($this->session->userdata('id'));
+            $this->load->view('pages/'.$page, $data);
+            
         }
 
         //cadastro de url
@@ -44,8 +55,6 @@
                 $user = $this->session->userdata('id'); //id do usuario logado
                 $data = array('url' => $this->input->post('url'), 'user' => $user);
 
-                $this->load->model('Url');
-
                 //realiza o cadastro
                 $this->Url->insert_url($data);
 
@@ -64,8 +73,6 @@
         public function del_url(){
 
             $data = $this->input->post('id');
-
-            $this->load->model('Url');
 
             $this->Url->delete_url($data);
 
