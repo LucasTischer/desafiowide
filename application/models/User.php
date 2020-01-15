@@ -1,6 +1,10 @@
 <?php
 
 class User extends CI_Model{
+
+    public function __construct(){
+        $this->load->database();
+    }
     
     //verifica se o usuario existe no banco de dados
     public function can_login($email, $senha){
@@ -22,5 +26,16 @@ class User extends CI_Model{
     public function insert_user($data){
 
         $this->db->insert("users", $data);
+    }
+
+    //retorna os dados do usuario
+    public function select_user($email){
+        $this->db->where('email', $email);
+
+        $query = $this->db->get('users');
+        $data = $query->result();
+
+        return $data;
+
     }
 }

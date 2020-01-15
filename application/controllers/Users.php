@@ -25,12 +25,15 @@
                 $this->load->model('User');
                 
                 //verifica as credenciais no banco de dados e caso o usuario 
-                //for encontrado cria uma sessao com o email
+                //for encontrado cria uma sessao com o seu id
                 //e direciona para a pagina inicial
                 if($this->User->can_login($email, $senha)){
-                    $session_data = array('email' => $email);
+
+                    $data = $this->User->select_user($email);
+
+                    $session_data = array('id' => $data['0']->id);
                     $this->session->set_userdata($session_data);
-                    redirect(base_url().'Pages/view');
+                    redirect(base_url().'Urls/view');
                 }
                 //se nao encontrado retorna ao login e mosta erro de login invalido
                 else{
@@ -47,7 +50,7 @@
         //finaliza a sessao do usuario e volta ao login
         public function logout(){
 
-            $this->session->unset_userdata('email');
+            $this->session->unset_userdata('id');
             redirect(base_url().'Users/login');
         }
 

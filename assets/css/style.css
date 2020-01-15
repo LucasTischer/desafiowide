@@ -1,0 +1,12 @@
+* {
+  border-radius: 0 !important;
+}
+
+.formButton{
+  display: inline;
+}
+
+.btn_form{
+  min-width: 42px;
+  margin-bottom: 5px;
+}
