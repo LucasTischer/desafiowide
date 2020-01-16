@@ -51,29 +51,34 @@
               <tr>
                 <th scope="col">URL</th>
                 <th scope="col">STATUS</th>
-                <th scope="col">RETORNO</th>
-                <th scope="col">ATUALIZADO EM</th>
+                <th scope="col">STATUS CODE</th>
+                <th scope="col">ULTIMA ATUALIZAÇÃO</th>
                 <th scope="col">AÇÕES</th>
               </tr>
             </thead>
             <tbody id="tabela_retorno">
               <?php
                 foreach($urls as $url):
-                  echo "<tr>
-                      <td>".$url['url']."</td>
-                      <td>".$url['status']."</td>
-                      <td></td>
-                      <td>".$url['updated_at']."</td>
-                      <td>"; 
-              ?>
-                        <button id="ver" type="submit" class="btn btn-outline-primary btn_form " value=".$url['id']." title="Visializar"> Visualizar </button>
-                        
-                        <form class="formButton" method="POST" action="<?php echo base_url(); ?>Urls/del_url">
+                  ?>
+                  <tr>
+                  <td><?php echo $url['url']; ?></td>
+                  <td><?php echo $url['status']; ?></td>
+                  <td><?php echo $url['status_code']; ?></td>
+                  <td><?php echo $url['updated_at']; ?></td>
+                  <td>
+                      <form class="formButton" method="POST" action="<?php echo base_url(); ?>Urls/ver_retorno_url">
+                        <textarea type="text" name="text" id="id" value="" style="display:none;"><?php echo $url['retorno']; ?> </textarea>
+                        <?php if($url['status_code'] < 400){?>
+                        <button id="ver" type="submit" class="btn btn-outline-primary btn_form " title="Visializar"> Visualizar </button>
+                        <?php } ?>
+                      </form>
+
+                      <form class="formButton" method="POST" action="<?php echo base_url(); ?>Urls/del_url">
                           <input type="text" name="id" id="id" value="<?php echo $url['id']; ?>" hidden="">
                           <button id="del" type="submit" class="btn btn-outline-danger del btn_form" title="Excluír câmera"> Excluír </button>
-                        </form>
-                      </td>
-                    </tr>
+                      </form>
+                  </td>
+                </tr>
               <?php
                 endforeach;
               ?>

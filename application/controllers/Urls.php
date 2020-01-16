@@ -80,6 +80,11 @@
             redirect(base_url().'Urls/view');
         }
 
+        public function ver_retorno_url(){
+            $data = $this->input->post('text');
+            echo "<textarea cols=\"200\" rows=\"300\">". strval($data) ."</textarea>";
+        }
+
     }
 
 ?>    
